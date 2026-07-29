@@ -1,0 +1,82 @@
+[
+  {
+    "id": 0,
+    "name": "John Doe",
+    "phone": "0123456789",
+    "email": "john@email.com",
+    "note": "johndoe",
+    "style": "lightblue"
+  },
+  {
+    "id": 1,
+    "name": "Maria Novak",
+    "phone": "+1 (312) 555-0146",
+    "email": "maria.novak@fastmail.com",
+    "note": "Study group partner — prefers texts over calls. Met at the Week 3 workshop.",
+    "style": "#2E63D6"
+  },
+  {
+    "id": 2,
+    "name": "Liza Smith",
+    "phone": "0123456789",
+    "email": "liza@email.com",
+    "note": "meet on bus station",
+    "style": "lightgreen"
+  },
+  {
+    "id": 3,
+    "name": "Andrii Petrovych",
+    "phone": "0543456456",
+    "email": "Andrii@email.com",
+    "note": "meet on bus station",
+    "style": "lightgreen"
+  },
+  {
+    "id": 4,
+    "name": "Dima Andreiko",
+    "phone": "380 68 837 27 91",
+    "email": "dimaandreiko8888@email.com",
+    "note": "Fs dev",
+    "style": "lightpink"
+  },
+  {
+    "id": 5,
+    "name": "Ihor Ihor",
+    "phone": "380 50 854 29 57",
+    "email": "ihor06@email.com",
+    "note": "FS dev from IF",
+    "style": "magenta"
+  },
+  {
+    "id": 6,
+    "name": "Iliina Diana",
+    "phone": "380 97 876 29 67",
+    "email": "carrot997@email.com",
+    "note": "friend",
+    "style": "lightgray"
+  },
+  {
+    "id": 7,
+    "name": "John Sena",
+    "phone": "380 98 988 39 12",
+    "email": "johnSena@email.com",
+    "note": "Wrestling",
+    "style": "lightgray"
+  },
+  {
+    "id": 8,
+    "name": "Elon Musk",
+    "phone": "12567 765 543",
+    "email": "SpaceX@email.com",
+    "note": "",
+    "style": "purple"
+  },
+  {
+    "id": 9,
+    "name": "Zen Chen",
+    "phone": "49 83875 737",
+    "email": "chen@email.com",
+    "note": "",
+    "style": "orange"
+  }
+]
