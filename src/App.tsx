@@ -1,28 +1,19 @@
 import './App.css'
 import Table from './components/Table'
 import ContactsInfo from "./components/ContactsInfo.tsx";
-import {useEffect, useState} from "react";
+import {useUsers} from "./hooks/useUsers.ts";
 
 export interface User{
   id:number
   name:string
-  phone:number
+  phone:string
   email:string
+  note:string
+  style:string
 }
 
 function App() {
-
-  const [users,setUsers] = useState<User[]>([]);
-
-  useEffect(()=> {
-    async function getUsers() {
-      const response= await fetch("/users.json")
-      const data : User[] = await response.json()
-
-      setUsers(data)
-    }
-    getUsers()
-  },[])
+  const { users, addUser, deleteUser, editUser } = useUsers();
 
       return(
    <>
@@ -36,7 +27,7 @@ function App() {
             border-gray-300
         "
        >
-         <Table users={users} />
+         <Table users={users} addUser={addUser} />
        </aside>
 
        <div

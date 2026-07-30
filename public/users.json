@@ -5,7 +5,7 @@
     "phone": "0123456789",
     "email": "john@email.com",
     "note": "johndoe",
-    "style": "lightblue"
+    "style": "#ADD8E6"
   },
   {
     "id": 1,
@@ -21,7 +21,7 @@
     "phone": "0123456789",
     "email": "liza@email.com",
     "note": "meet on bus station",
-    "style": "lightgreen"
+    "style": "#90EE90"
   },
   {
     "id": 3,
@@ -29,7 +29,7 @@
     "phone": "0543456456",
     "email": "Andrii@email.com",
     "note": "meet on bus station",
-    "style": "lightgreen"
+    "style": "#90EE90"
   },
   {
     "id": 4,
@@ -37,7 +37,7 @@
     "phone": "380 68 837 27 91",
     "email": "dimaandreiko8888@email.com",
     "note": "Fs dev",
-    "style": "lightpink"
+    "style": "#FFB6C1"
   },
   {
     "id": 5,
@@ -45,7 +45,7 @@
     "phone": "380 50 854 29 57",
     "email": "ihor06@email.com",
     "note": "FS dev from IF",
-    "style": "magenta"
+    "style": "#FF00FF"
   },
   {
     "id": 6,
@@ -53,7 +53,7 @@
     "phone": "380 97 876 29 67",
     "email": "carrot997@email.com",
     "note": "friend",
-    "style": "lightgray"
+    "style": "#D3D3D3"
   },
   {
     "id": 7,
@@ -61,7 +61,7 @@
     "phone": "380 98 988 39 12",
     "email": "johnSena@email.com",
     "note": "Wrestling",
-    "style": "lightgray"
+    "style": "#D3D3D3"
   },
   {
     "id": 8,
@@ -69,7 +69,7 @@
     "phone": "12567 765 543",
     "email": "SpaceX@email.com",
     "note": "",
-    "style": "purple"
+    "style": "#800080"
   },
   {
     "id": 9,
@@ -77,6 +77,6 @@
     "phone": "49 83875 737",
     "email": "chen@email.com",
     "note": "",
-    "style": "orange"
+    "style": "#FFA500"
   }
 ]
