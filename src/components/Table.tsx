@@ -3,44 +3,30 @@ import sortUsers from "../utils/sortUsers.ts"
 import getTextColor from "../utils/textColor.ts";
 import {useState} from "react";
 
-interface tableProps {
-    users: User[],
-    addUser: (user: { name: string; phone: string; email: string; note: string; style: string }) => void,
+interface TableProps {
+    users: User[];
+    selectedUser: User | null;
+    setSelectedUser: React.Dispatch<React.SetStateAction<User | null>>;
+    onAddClick: () => void;
 }
 
-function Table( {users , addUser}: tableProps  ){
+function Table({ users,selectedUser,setSelectedUser,onAddClick, }: TableProps){
 
-    const {sortedUsers,firstLetters} = sortUsers(users)
+    const {sortedUsers} = sortUsers(users)
 
-    const [isModalOpen ,setIsModalOpen] = useState(false);
+    const [search, setSearch] = useState("");
 
-    const [color,setColor] = useState("#87CEEB");
+    const filteredUsers = sortedUsers.filter((user) => {
+        const value = search.toLowerCase().trim();
 
-    const [name, setName] = useState("");
-    const [phone, setPhone] = useState("");
-    const [email, setEmail] = useState("");
-    const [note, setNote] = useState("");
-    const [style, setStyle] = useState("#87CEEB");
+        return (
+            user.name.toLowerCase().includes(value) ||
+            user.phone.toLowerCase().includes(value) ||
+            user.email.toLowerCase().includes(value)
+        );
+    });
 
-
-    function handleSave() {
-        addUser({
-            name,
-            phone,
-            email,
-            note,
-            style,
-        });
-
-        setName("");
-        setPhone("");
-        setEmail("");
-        setNote("");
-        setStyle("#87CEEB");
-
-        setIsModalOpen(false);
-    }
-
+    const filteredLetters = [...new Set(filteredUsers.map(user => user.name[0].toUpperCase()))];
 
     return (<>
     <section className="flex flex-col w-full h-full">
@@ -63,7 +49,7 @@ function Table( {users , addUser}: tableProps  ){
                             hover:bg-[rgb(17_75_202)]
 
                         "
-                    onClick={()=>setIsModalOpen(!isModalOpen)}
+                        onClick={onAddClick}
                     >
                         + Add contact
                     </button>
@@ -71,44 +57,60 @@ function Table( {users , addUser}: tableProps  ){
             </div>
             <div className={"flex flex-col mt-4"}>
                 <label  htmlFor="search">Search contacts</label>
-                <input className="bg-white h-10 rounded-2xl pl-2 "  id="search" type="search" placeholder="Search name, phone, or email"/>
-            </div>
+                <input
+                    id="search"
+                    type="search"
+                    placeholder="Search name, phone, or email"
+                    className="bg-white h-10 rounded-2xl pl-2"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                /></div>
             </header>
                 <div className="overflow-y-auto mt-4 p-4">
-                {firstLetters.map(letter => (
+                {filteredLetters.map(letter => (
 
                     <div key={letter}>
 
                         <h2 className={"font-medium text-gray-600"}>{letter}</h2>
 
                         <ul className="pl-4">
-                            {sortedUsers
+                            {filteredUsers
                                 .filter(user => user.name[0].toUpperCase() === letter)
                                 .map(user => (
-
                                     <li
                                         key={user.id}
-                                        className="flex
-                                        items-center
-                                        gap-3
-                                         p-2
-                                         mr-2
-                                         rounded-2xl
-                                         transition-all
-                                        duration-400
-                                        hover:bg-[rgb(184_189_189/0.2)]
-                                          hover:pl-3">
-                                        <div className="flex items-center justify-center w-11 h-11 rounded-full font-medium color"
-                                             style={{backgroundColor : user.style,
-                                                    color:getTextColor(user.style)
-                                                }}
+                                        onClick={() => setSelectedUser(user)}
+                                        className={`
+                                            flex
+                                            cursor-pointer
+                                            items-center
+                                            gap-3
+                                            p-2
+                                            mr-2
+                                            rounded-2xl
+                                            transition-all
+                                            duration-300
+                                            hover:pl-3
+                                            ${
+                                            selectedUser?.id === user.id
+                                                ? "bg-blue-100 pl-3"
+                                                : "hover:bg-[rgb(184_189_189/0.2)]"
+                                                 }
+                                            `}
+                                             >
+                                        <div
+                                            className="flex items-center justify-center w-11 h-11 rounded-full font-medium"
+                                            style={{
+                                                backgroundColor: user.style,
+                                                color: getTextColor(user.style),
+                                            }}
                                         >
                                             {user.name[0]}
                                         </div>
 
                                         <div className="flex flex-col">
                                             <span className="font-medium">{user.name}</span>
-                                            <span className={"text-gray-500"}>{user.phone}</span>
+                                            <span className="text-gray-500">{user.phone}</span>
                                         </div>
                                     </li>
                                 ))}
@@ -118,101 +120,6 @@ function Table( {users , addUser}: tableProps  ){
                 ))}
                  </div>
             </section>
-            {isModalOpen && (
-                <div
-                    className="
-            fixed inset-0
-            bg-black/50
-            flex items-center justify-center
-        "
-                    onClick={() => setIsModalOpen(false)}
-                >
-                    <div
-                        className="
-                bg-white
-                rounded-2xl
-                p-6
-                w-[500px]
-            "
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        <h2 className="text-xl font-semibold mb-4">
-                            Add contact
-                        </h2>
-
-                        <input
-                            className="border w-full p-2 rounded mb-3"
-                            placeholder="Name"
-
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                        />
-
-                        <input
-                            className="border w-full p-2 rounded mb-3"
-                            placeholder="Phone"
-
-                            value={phone}
-                            onChange={(e) => setPhone(e.target.value)}
-                        />
-
-                        <input
-                            className="border w-full p-2 rounded mb-4"
-                            placeholder="Email"
-
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-
-                        <input
-                            className="border w-full p-2 rounded mb-4"
-                            placeholder="Note"
-
-                            value={note}
-                            onChange={(e) => setNote(e.target.value)}
-                        />
-
-                        <div className="mb-4">
-                            <label className="block mb-2 font-medium">
-                                Avatar color
-                            </label>
-
-                            <div className="flex items-center gap-3">
-                                <input
-                                    type="color"
-                                    value={color}
-                                    onChange={(e) => setColor(e.target.value)}
-                                    className="w-12 h-12 cursor-pointer rounded"
-                                />
-
-                                <input
-                                    type="text"
-                                    value={color}
-                                    readOnly
-                                    className="border flex-1 p-2 rounded"
-                                />
-                            </div>
-                        </div>
-
-
-                        <div className="flex justify-end gap-2">
-                            <button
-                                className="px-4 py-2 rounded bg-gray-300"
-                                onClick={() => setIsModalOpen(false)}
-                            >
-                                Cancel
-                            </button>
-
-                            <button
-                                className="px-4 py-2 rounded bg-blue-600 text-white"
-                                onClick={() => handleSave()}
-                            >
-                                Save
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )}
         </>
     )
 }
