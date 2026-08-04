@@ -103,17 +103,19 @@ function App() {
 
     return (
         <>
-            <main className="flex flex-col lg:flex-row min-h-screen p-5 gap-5">
+            <main className="flex flex-col lg:flex-row h-screen p-5 gap-5">
                 <aside
                     className="
-                    w-full
-                    lg:w-[35%]
-                    bg-[rgb(232_238_252/53%)]
-                    rounded-2xl
-                    lg:rounded-l-2xl
-                    border
-                    border-gray-300
-                "
+                       w-full
+                        lg:w-[35%]
+                        flex
+                        flex-col
+                        min-h-0
+                        bg-[rgb(232_238_252/53%)]
+                        rounded-2xl
+                        border
+                        border-gray-300
+                    "
                 >
                     <Table
                         users={users}

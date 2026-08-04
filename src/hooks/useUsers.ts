@@ -5,37 +5,63 @@ export function useUsers() {
     const [users, setUsers] = useState<User[]>([])
 
     useEffect(() => {
-
         async function fetchUsers() {
-            const response = await fetch("./users.json")
-            const usersData = await response.json();
+            try {
+                const response = await fetch("http://localhost:3000/users");
 
-            setUsers(usersData);
+                if (!response.ok) {
+                    throw new Error(`HTTP error: ${response.status}`);
+                }
 
+                const usersData = await response.json();
+                setUsers(usersData);
+            } catch (err) {
+                console.error(err);
+            }
         }
+
         fetchUsers();
-    },[])
+    }, []);
 
 
-    function addUser(user: Omit<User, "id">) {
-        setUsers((prev) => [
-            ...prev,
-            {
-                id: Date.now(),
-                ...user,
+    async function addUser(user: Omit<User, "id">) {
+        const response = await fetch("http://localhost:3000/users", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
             },
-        ]);
+            body: JSON.stringify(user),
+        });
+
+        const newUser = await response.json();
+
+        setUsers((prev) => [...prev, newUser]);
     }
 
-    function deleteUser(id: number) {
+    async function deleteUser(id: number) {
+        await fetch(`http://localhost:3000/users/${id}`, {
+            method: "DELETE",
+        });
+
         setUsers((prev) => prev.filter((user) => user.id !== id));
     }
 
-    function editUser(updatedUser: User) {
+    async function editUser(updatedUser: User) {
+        const response = await fetch(
+            `http://localhost:3000/users/${updatedUser.id}`,
+            {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(updatedUser),
+            }
+        );
+
+        const user = await response.json();
+
         setUsers((prev) =>
-            prev.map((user) =>
-                user.id === updatedUser.id ? updatedUser : user
-            )
+            prev.map((u) => (u.id === user.id ? user : u))
         );
     }
 
