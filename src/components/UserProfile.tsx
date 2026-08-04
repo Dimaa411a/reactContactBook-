@@ -19,9 +19,9 @@ function UserProfile({ user }: UserProfileProps) {
     return (
         <section className="ml-11">
             <header>
-                <div className="flex">
+                <div className="flex ">
                     <div
-                        className="flex w-32 h-32 rounded-full items-center justify-center text-5xl font-medium"
+                        className="flex w-16 h-16 mt-2 mb-2 lg:w-32 lg:h-32 rounded-full items-center justify-center text-3xl lg:text-5xl font-medium shrink-0"
                         style={{
                             backgroundColor: user.style,
                             color: getTextColor(user.style),
@@ -35,7 +35,7 @@ function UserProfile({ user }: UserProfileProps) {
                             {user.name}
                         </h1>
 
-                        <span className="text-gray-500">
+                        <span className="hidden sm:block text-gray-500">
                             Contact details
                         </span>
                     </div>

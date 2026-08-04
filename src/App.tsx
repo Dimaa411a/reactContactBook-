@@ -103,12 +103,14 @@ function App() {
 
     return (
         <>
-            <main className="flex h-screen p-5">
+            <main className="flex flex-col lg:flex-row min-h-screen p-5 gap-5">
                 <aside
                     className="
-                    w-[35%]
+                    w-full
+                    lg:w-[35%]
                     bg-[rgb(232_238_252/53%)]
-                    rounded-l-2xl
+                    rounded-2xl
+                    lg:rounded-l-2xl
                     border
                     border-gray-300
                 "
@@ -124,25 +126,42 @@ function App() {
                 <div
                     className="
                     grid
-                    grid-rows-[10%_25%_65%]
-                    grid-cols-[65%_35%]
-                    w-[65%]
+                    grid-cols-1
+                    grid-rows-[auto_auto_auto]
+                    lg:grid-cols-[65%_35%]
+                    lg:grid-rows-[10%_25%_65%]
+                    w-full
+                    lg:w-[65%]
                     bg-white
-                    rounded-r-2xl
+                    rounded-2xl
+                    lg:rounded-r-2xl
                     border
-                    border-l-0
+                    lg:border-l-0
                     border-gray-300
                 "
                 >
-                    <div className="col-start-1 row-start-2">
+
+                    <div className="row-start-1 lg:col-start-1 lg:row-start-2">
                         <UserProfile user={selectedUser} />
                     </div>
 
-                    <div className="col-start-1 col-end-3 row-start-3">
+                    <div className="row-start-2 lg:col-start-1 lg:col-end-3 lg:row-start-3">
                         <UserInfo user={selectedUser} />
                     </div>
 
-                    <div className="col-start-2 row-start-2 flex justify-end gap-2 mt-2 w-[85%]">
+                    <div className="
+                    row-start-3
+                    flex
+                    justify-center
+                    gap-2
+                    p-4
+                    lg:col-start-2
+                    lg:row-start-2
+                    lg:justify-end
+                    lg:mt-2
+                    lg:w-[85%]
+                    "
+                        >
                         <EditButton
                             disabled={!selectedUser}
                             onClick={openEditModal}
