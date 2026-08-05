@@ -103,7 +103,7 @@ function App() {
 
     return (
         <>
-            <main className="flex flex-col lg:flex-row h-screen p-5 gap-5">
+            <main className="flex flex-col lg:flex-row h-screen p-5">
                 <aside
                     className="
                        w-full
@@ -112,7 +112,9 @@ function App() {
                         flex-col
                         min-h-0
                         bg-[rgb(232_238_252/53%)]
-                        rounded-2xl
+                        rounded-t-2xl
+                        lg:rounded-l-2xl
+                        lg:rounded-r-none
                         border
                         border-gray-300
                     "
@@ -135,8 +137,9 @@ function App() {
                     w-full
                     lg:w-[65%]
                     bg-white
-                    rounded-2xl
+                    rounded-b-2xl
                     lg:rounded-r-2xl
+                    lg:rounded-l-none
                     border
                     lg:border-l-0
                     border-gray-300
